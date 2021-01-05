@@ -5,6 +5,7 @@ library(GA)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
+library(shinyjs)
 
 plan(multiprocess)
 
@@ -24,10 +25,14 @@ server <- function(input, output) {
   best_fitness <- reactiveVal(NA)
   population <- reactiveVal(NA)
   fitness_summary <- reactiveVal(NA)
+  optimising <- reactiveVal(FALSE)
   
   
   observeEvent(input$run_opt, {
+    
     future({
+
+      queue$producer$fireAssignReactive("optimising", TRUE)
       
       shiny_monitor <- function(x){
         queue$producer$fireAssignReactive("iteration", x@iter)
@@ -45,11 +50,23 @@ server <- function(input, output) {
                maxiter = isolate(input$iter_num),
                monitor = shiny_monitor)
       
+      queue$producer$fireAssignReactive("optimising", FALSE)
+      
+      ga
     })
     
     # Return something so as to not block the UI
     NULL
     
+  })
+  
+  # Disable run button if currently optimising
+  observe({
+    if(optimising()){
+      disable("run_opt")
+    } else {
+      enable("run_opt")
+    }
   })
   
   # Render outputs

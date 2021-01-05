@@ -11,7 +11,7 @@ dashboardPage(
   dashboardSidebar(
     sliderInput(
       "pop_size",
-      label = "Population",
+      label = "Population Size",
       min = 2,
       max = 200,
       value = 50
@@ -38,8 +38,8 @@ dashboardPage(
   ),
   
   dashboardBody(fluidRow(
-    infoBox(title = "Iteration", value = uiOutput("iteration_count")),
-    infoBox(title = "Best Fitness", value = uiOutput("best_fitness"))
+    infoBox(title = "Iteration", value = uiOutput("iteration_count"), icon = icon("redo")),
+    infoBox(title = "Best Fitness", value = uiOutput("best_fitness"), icon = icon("thumbs-up"))
   ),
   fluidRow(
     box(title = "All Solutions in Population", plotOutput("population_plot")),

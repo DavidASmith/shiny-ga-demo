@@ -14,7 +14,6 @@ rastrigin <- function(x1, x2)
   20 + x1^2 + x2^2 - 10*(cos(2*pi*x1) + cos(2*pi*x2))
 }
 
-
 # Define server logic 
 server <- function(input, output) {
   
@@ -48,6 +47,7 @@ server <- function(input, output) {
                pmutation = isolate(input$mutation_prob),
                pcrossover = isolate(input$crossover_prob),
                maxiter = isolate(input$iter_num),
+               elitism = base::max(1, round(isolate(input$pop_size) * isolate(input$elitism))), 
                monitor = shiny_monitor)
       
       queue$producer$fireAssignReactive("optimising", FALSE)

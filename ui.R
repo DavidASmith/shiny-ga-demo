@@ -29,6 +29,13 @@ dashboardPage(
       max = 1,
       value = 0.8
     ),
+    sliderInput(
+      "elitism",
+      label = "Elitism",
+      min = 0,
+      max = 1,
+      value = 0.05
+    ),
     numericInput("iter_num",
                  "Iterations",
                  value = 100),

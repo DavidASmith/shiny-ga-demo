@@ -2,11 +2,11 @@ library(shiny)
 library(shinydashboard)
 library(shinyjs)
 
-# Define UI for application
+# Shiny dashboard UI
 dashboardPage(
   # Application title
   dashboardHeader(title = "Genetic Algorithm Example"),
-  
+  # Sidebar options
   dashboardSidebar(
     sliderInput(
       "pop_size",
@@ -42,19 +42,33 @@ dashboardPage(
     actionButton("run_opt",
                  "Run")
   ),
-  
+  # Outputs
   dashboardBody(
     useShinyjs(),
     fluidRow(
       infoBox(
         title = "Iteration",
         value = uiOutput("iteration_count"),
-        icon = icon("redo")
+        icon = icon("redo"), 
+        width = 3
       ),
       infoBox(
         title = "Best Fitness",
         value = uiOutput("best_fitness"),
-        icon = icon("thumbs-up")
+        icon = icon("thumbs-up"), 
+        width = 3
+      ),
+      infoBox(
+        title = "Best X1",
+        value = uiOutput("best_x1"),
+        icon = icon("thumbs-up"), 
+        width = 3
+      ),
+      infoBox(
+        title = "Best X2",
+        value = uiOutput("best_x2"),
+        icon = icon("thumbs-up"), 
+        width = 3
       )
     ),
     fluidRow(
@@ -62,5 +76,4 @@ dashboardPage(
       box(title = "Fitness", plotOutput("fitness_plot"))
     )
   )
-  
 )

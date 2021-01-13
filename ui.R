@@ -74,6 +74,19 @@ dashboardPage(
     fluidRow(
       box(title = "All Solutions in Population", plotOutput("population_plot")),
       box(title = "Fitness", plotOutput("fitness_plot"))
+    ),
+    fluidRow(
+      box(title = "What is this?", 
+          "This is an interactive example of using a genetic algorithm to solve a simple problem. 
+          Here we're attempting to find the optimum values for X1 and X2 to minimise the objective 
+          function. We're using a Rastrigin function as the objective. You can see this plotted in 
+          the population plot above. Note that there are many local minima (darker colors are lower). 
+          The optimum value for both X1 and X2 is zero which also return zero from the objective function.", 
+          br(), br(),
+          "Each red dot in the plot on the left represents an individual in the population. The plot on the 
+          right shows the best, mean, and median fitness over all iterations of the algorithm.",
+          br(), br(), 
+          "You can try different parameters for the genetic algorithm to explore how these affect the outcome.")
     )
   )
 )

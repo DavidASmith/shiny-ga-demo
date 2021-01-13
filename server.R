@@ -50,7 +50,7 @@ server <- function(input, output) {
     future({
       # So we can disable the optimise button
       queue$producer$fireAssignReactive("optimising", TRUE)
-    
+      
       # Custom monitor function for GA returns data to the reactive values
       shiny_monitor <- function(x){
         queue$producer$fireAssignReactive("iteration", x@iter)
@@ -101,17 +101,21 @@ server <- function(input, output) {
   
   # Best fitness
   output$best_fitness <- renderText({
-    format(max(req(fitness())), digits = 5)
+    format(max(req(fitness())) * -1, digits = 5)
   })
   
   # Population plot
   output$population_plot <- renderPlot({
-    pop <- req(population())
-    pop <- as.data.frame(pop)
-    
-    rast_canvas +
-      geom_point(data = pop, aes(V1, V2), colour = "red")
-    
+    # Display blank canvas if optimisation not yet run
+    if(is.na(population())){
+      rast_canvas
+    } else {
+      pop <- req(population())
+      pop <- as.data.frame(pop)
+      
+      rast_canvas +
+        geom_point(data = pop, aes(V1, V2), colour = "red")
+    }
   })
   
   # Fitness plot
@@ -120,12 +124,13 @@ server <- function(input, output) {
     
     fitness_graph %>% 
       as.data.frame() %>% 
-      select(max, mean, median) %>% 
+      select(best = max, mean, median) %>% 
       mutate(iteration = row_number()) %>% 
       gather(key = "fitness", 
              value = "value", 
              -iteration) %>% 
       filter(complete.cases(.)) %>% 
+      mutate(value = value * -1) %>% 
       ggplot(aes(iteration, value, col = fitness)) + geom_line()
     
   })

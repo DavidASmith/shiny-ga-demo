@@ -86,7 +86,12 @@ dashboardPage(
           "Each red dot in the plot on the left represents an individual in the population. The plot on the 
           right shows the best, mean, and median fitness over all iterations of the algorithm.",
           br(), br(), 
-          "You can try different parameters for the genetic algorithm to explore how these affect the outcome.")
+          "You can try different parameters for the genetic algorithm to explore how these affect the outcome."),
+      box(title = "More information", 
+          "1. More about the ", tags$a(href="https://en.wikipedia.org/wiki/Rastrigin_function", "Rastrigin function"), ".", br(),
+          "2. Luca Scrucca's ", tags$a(href="https://luca-scr.github.io/GA/", "GA R Package"), ".", br(), 
+          "3. This application's source code on ", tags$a(href="https://github.com/DavidASmith/shiny-ga-demo", "Github"), ".", br()
+          )
     )
   )
 )

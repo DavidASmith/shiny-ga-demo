@@ -23,3 +23,7 @@ Users can explore the impact of different values for:
 ## Implementation
 
 The application makes use of the [future](https://cran.r-project.org/web/packages/future/index.html) package to allow the GA to run asynchronously, and the [ipc package](https://cran.r-project.org/web/packages/ipc/index.html) for passing messages between the GA and Shiny.
+
+## Give it a try
+
+This application is deployed at http://shiny-ga-demo.uksouth.azurecontainer.io:3838/ for you to try (assuming the hosting doesn't cost me too much).

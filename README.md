@@ -26,4 +26,4 @@ The application makes use of the [future](https://cran.r-project.org/web/package
 
 ## Give it a try
 
-This application is deployed at http://shiny-ga-demo.uksouth.azurecontainer.io:3838/ for you to try (assuming the hosting doesn't cost me too much).
+This application is deployed at https://shiny-ga-demo.azurewebsites.net (assuming the hosting doesn't cost me too much).

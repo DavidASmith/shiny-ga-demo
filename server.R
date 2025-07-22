@@ -10,7 +10,7 @@ library(png)
 library(ggpubr)
 
 # Define plan for async process using future package
-plan(multiprocess)
+plan(multisession, workers = 4)
 
 # Objective function for optimisation (https://en.wikipedia.org/wiki/Rastrigin_function)
 rastrigin <- function(x1, x2)
@@ -107,7 +107,7 @@ server <- function(input, output) {
   # Population plot
   output$population_plot <- renderPlot({
     # Display blank canvas if optimisation not yet run
-    if(is.na(population())){
+    if(!is.matrix(population())){
       rast_canvas
     } else {
       pop <- req(population())
